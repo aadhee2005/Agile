@@ -1,0 +1,173 @@
+Below is a **Library Management System** example in the same format as your Student Result Maven + JUnit program.
+
+---
+
+# 📘 Library Management System – Maven + JUnit
+
+---
+
+## 1️⃣ pom.xml
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>LIBRARY_MANAGEMENT_MAVEN</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>Library Management Application</name>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.0</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.1.2</version>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
+```
+
+---
+
+## 2️⃣ Create `Library.java`
+
+```java
+package com.example;
+
+public class Library {
+
+    private int totalBooks;
+
+    public Library(int totalBooks) {
+        this.totalBooks = totalBooks;
+    }
+
+    public int getTotalBooks() {
+        return totalBooks;
+    }
+
+    public boolean issueBook(int numberOfBooks) {
+        if (numberOfBooks <= totalBooks && numberOfBooks > 0) {
+            totalBooks -= numberOfBooks;
+            return true;
+        }
+        return false;
+    }
+
+    public void returnBook(int numberOfBooks) {
+        if (numberOfBooks > 0) {
+            totalBooks += numberOfBooks;
+        }
+    }
+
+    public boolean isBookAvailable() {
+        return totalBooks > 0;
+    }
+}
+```
+
+---
+
+## 3️⃣ Create `LibraryTest.java` for JUnit Testing
+
+```java
+package com.example;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class LibraryTest {
+
+    @Test
+    void testInitialBooks() {
+        Library library = new Library(10);
+        assertEquals(10, library.getTotalBooks());
+    }
+
+    @Test
+    void testIssueBookSuccess() {
+        Library library = new Library(10);
+        boolean result = library.issueBook(3);
+        assertTrue(result);
+        assertEquals(7, library.getTotalBooks());
+    }
+
+    @Test
+    void testIssueBookFailure() {
+        Library library = new Library(5);
+        boolean result = library.issueBook(6);
+        assertFalse(result);
+        assertEquals(5, library.getTotalBooks());
+    }
+
+    @Test
+    void testReturnBook() {
+        Library library = new Library(5);
+        library.returnBook(2);
+        assertEquals(7, library.getTotalBooks());
+    }
+
+    @Test
+    void testBookAvailability() {
+        Library library = new Library(1);
+        assertTrue(library.isBookAvailable());
+
+        library.issueBook(1);
+        assertFalse(library.isBookAvailable());
+    }
+}
+```
+
+---
+
+# ✅ What This Program Does
+
+* Maintains total number of books
+* Issues books (reduces count)
+* Returns books (increases count)
+* Checks availability
+* Fully tested using JUnit 5
+
+---
+
+If you want, I can also give:
+
+* 📚 Library system with **Book class + Member class**
+* 📚 Version using **ArrayList**
+* 📚 Version with **Database (JDBC)**
+* 📚 Version following **HOOD / Fusion / Unified Process**
+
+Tell me which one you need 😊
